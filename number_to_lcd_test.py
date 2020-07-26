@@ -3,6 +3,10 @@ from number_to_lcd import number_to_lcd
 
 import unittest
 
+for _, value in dictionary_of_display_formats.items():
+    for graphic in value:
+        print(graphic)
+
 
 class NumberToLCDTestCase(unittest.TestCase):
 
@@ -35,9 +39,6 @@ class NumberToLCDTestCase(unittest.TestCase):
 
     def test_displays_the_number_zero_on_the_lcd(self):
         self.assertEqual(number_to_lcd(0), dictionary_of_display_formats[0])
-
-    def test_displays_the_number_ten_on_the_lcd(self):
-        self.assertEqual(number_to_lcd(10), dictionary_of_display_formats[1]+dictionary_of_display_formats[0])
 
 
 if __name__ == '__main__':
