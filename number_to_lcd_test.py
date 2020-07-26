@@ -3,9 +3,6 @@ from number_to_lcd import number_to_lcd
 
 import unittest
 
-for _, v in dictionary_of_display_formats.items():
-    print(v)
-
 
 class NumberToLCDTestCase(unittest.TestCase):
 
