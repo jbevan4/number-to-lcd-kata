@@ -1,2 +1,4 @@
-number_one_in_lcd_form = """|\n|"""
-number_two_in_lcd_form = """_\n_|\n|_\n"""
+dictionary_of_display_formats = {
+    1:  """|\n|""",
+    2: """_\n_|\n|_\n""",
+}

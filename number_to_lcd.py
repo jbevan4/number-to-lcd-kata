@@ -1,7 +1,5 @@
-from constants import number_one_in_lcd_form, number_two_in_lcd_form
+from constants import dictionary_of_display_formats
 
 
 def number_to_lcd(number):
-    if number == 1:
-        return number_one_in_lcd_form
-    return number_two_in_lcd_form
+    return dictionary_of_display_formats.get(number)
