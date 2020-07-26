@@ -1,2 +1,4 @@
+from constants import number_one_in_lcd_form
+
 def number_to_lcd(number):
-    return 0
+    return number_one_in_lcd_form
