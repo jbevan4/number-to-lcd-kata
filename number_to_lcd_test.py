@@ -19,74 +19,16 @@ def captured_output():
         sys.stdout, sys.stderr = old_out, old_err
 
 
-def test_displays_the_number_one_on_the_lcd():
+@pytest.mark.parametrize("test_input,expected",
+                         [(1, " \n|\n|\n"), (2, "_ \n_|\n|_\n"), (3, "_ \n_|\n_|\n"),
+                          (4, "   \n|_|\n  |\n"), (5, " _ \n|_ \n _|\n"), (6, "   \n|_ \n|_|\n"),
+                          (7, "_ \n |\n |\n"), (8, " _ \n|_|\n|_|\n"), (9, " _\n|_|\n  |\n"),
+                          (0, " _ \n| |\n|_|\n")])
+def test_displays_single_digits_on_the_lcd(test_input, expected):
     with captured_output() as (out, err):
-        print_number_from_representation(number_to_lcd_representation(1))
+        print_number_from_representation(number_to_lcd_representation(test_input))
         output = out.getvalue()
-        assert output == " \n|\n|\n"
-
-
-def test_displays_the_number_two_on_the_lcd():
-    with captured_output() as (out, err):
-        print_number_from_representation(number_to_lcd_representation(2))
-        output = out.getvalue()
-        assert output == "_ \n_|\n|_\n"
-
-
-def test_displays_the_number_three_on_the_lcd():
-    with captured_output() as (out, err):
-        print_number_from_representation(number_to_lcd_representation(3))
-        output = out.getvalue()
-        assert output == "_ \n_|\n_|\n"
-
-
-def test_displays_the_number_four_on_the_lcd():
-    with captured_output() as (out, err):
-        print_number_from_representation(number_to_lcd_representation(4))
-        output = out.getvalue()
-        assert output == "   \n|_|\n  |\n"
-
-
-def test_displays_the_number_five_on_the_lcd():
-    with captured_output() as (out, err):
-        print_number_from_representation(number_to_lcd_representation(5))
-        output = out.getvalue()
-        assert output == " _ \n|_ \n _|\n"
-
-
-def test_displays_the_number_six_on_the_lcd():
-    with captured_output() as (out, err):
-        print_number_from_representation(number_to_lcd_representation(6))
-        output = out.getvalue()
-        assert output == "   \n|_ \n|_|\n"
-
-
-def test_displays_the_number_seven_on_the_lcd():
-    with captured_output() as (out, err):
-        print_number_from_representation(number_to_lcd_representation(7))
-        output = out.getvalue()
-        assert output == "_ \n |\n |\n"
-
-
-def test_displays_the_number_eight_on_the_lcd():
-    with captured_output() as (out, err):
-        print_number_from_representation(number_to_lcd_representation(8))
-        output = out.getvalue()
-        assert output == " _ \n|_|\n|_|\n"
-
-
-def test_displays_the_number_nine_on_the_lcd():
-    with captured_output() as (out, err):
-        print_number_from_representation(number_to_lcd_representation(9))
-        output = out.getvalue()
-        assert output == " _\n|_|\n  |\n"
-
-
-def test_displays_the_number_zero_on_the_lcd():
-    with captured_output() as (out, err):
-        print_number_from_representation(number_to_lcd_representation(0))
-        output = out.getvalue()
-        assert output == " _ \n| |\n|_|\n"
+        assert output == expected
 
 
 def test_displays_the_number_ten_on_the_lcd():
