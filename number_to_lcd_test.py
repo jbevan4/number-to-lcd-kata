@@ -1,44 +1,87 @@
-from constants import dictionary_of_display_formats
-from number_to_lcd import number_to_lcd
+from contextlib import contextmanager
+from io import StringIO
+from number_to_lcd import number_to_lcd_representation
+from number_to_lcd import print_number_from_representation
 
+import sys
 import unittest
 
-for _, value in dictionary_of_display_formats.items():
-    for graphic in value:
-        print(graphic)
+
+@contextmanager
+def captured_output():
+    new_out, new_err = StringIO(), StringIO()
+    old_out, old_err = sys.stdout, sys.stderr
+    try:
+        sys.stdout, sys.stderr = new_out, new_err
+        yield sys.stdout, sys.stderr
+    finally:
+        sys.stdout, sys.stderr = old_out, old_err
 
 
 class NumberToLCDTestCase(unittest.TestCase):
 
     def test_displays_the_number_one_on_the_lcd(self):
-        self.assertEqual(number_to_lcd(1), dictionary_of_display_formats[1])
+        with captured_output() as (out, err):
+            print_number_from_representation(number_to_lcd_representation(1))
+            output = out.getvalue()
+            self.assertEqual(output, " \n|\n|\n")
 
     def test_displays_the_number_two_on_the_lcd(self):
-        self.assertEqual(number_to_lcd(2), dictionary_of_display_formats[2])
+        with captured_output() as (out, err):
+            print_number_from_representation(number_to_lcd_representation(2))
+            output = out.getvalue()
+            self.assertEqual(output, "_ \n_|\n|_\n")
 
     def test_displays_the_number_three_on_the_lcd(self):
-        self.assertEqual(number_to_lcd(3), dictionary_of_display_formats[3])
+        with captured_output() as (out, err):
+            print_number_from_representation(number_to_lcd_representation(3))
+            output = out.getvalue()
+            self.assertEqual(output, "_ \n_|\n_|\n")
 
     def test_displays_the_number_four_on_the_lcd(self):
-        self.assertEqual(number_to_lcd(4), dictionary_of_display_formats[4])
+        with captured_output() as (out, err):
+            print_number_from_representation(number_to_lcd_representation(4))
+            output = out.getvalue()
+            self.assertEqual(output, "   \n|_|\n  |\n")
 
     def test_displays_the_number_five_on_the_lcd(self):
-        self.assertEqual(number_to_lcd(5), dictionary_of_display_formats[5])
+        with captured_output() as (out, err):
+            print_number_from_representation(number_to_lcd_representation(5))
+            output = out.getvalue()
+            self.assertEqual(output, " _ \n|_ \n _|\n")
 
     def test_displays_the_number_six_on_the_lcd(self):
-        self.assertEqual(number_to_lcd(6), dictionary_of_display_formats[6])
+        with captured_output() as (out, err):
+            print_number_from_representation(number_to_lcd_representation(6))
+            output = out.getvalue()
+            self.assertEqual(output, "   \n|_ \n|_|\n")
 
     def test_displays_the_number_seven_on_the_lcd(self):
-        self.assertEqual(number_to_lcd(7), dictionary_of_display_formats[7])
+        with captured_output() as (out, err):
+            print_number_from_representation(number_to_lcd_representation(7))
+            output = out.getvalue()
+            self.assertEqual(output, "_ \n |\n |\n")
 
     def test_displays_the_number_eight_on_the_lcd(self):
-        self.assertEqual(number_to_lcd(8), dictionary_of_display_formats[8])
+        with captured_output() as (out, err):
+            print_number_from_representation(number_to_lcd_representation(8))
+            output = out.getvalue()
+            self.assertEqual(output, " _ \n|_|\n|_|\n")
 
     def test_displays_the_number_nine_on_the_lcd(self):
-        self.assertEqual(number_to_lcd(9), dictionary_of_display_formats[9])
+        with captured_output() as (out, err):
+            print_number_from_representation(number_to_lcd_representation(9))
+            output = out.getvalue()
+            self.assertEqual(output, " _\n|_|\n  |\n")
 
     def test_displays_the_number_zero_on_the_lcd(self):
-        self.assertEqual(number_to_lcd(0), dictionary_of_display_formats[0])
+        with captured_output() as (out, err):
+            print_number_from_representation(number_to_lcd_representation(0))
+            output = out.getvalue()
+            self.assertEqual(output, " _ \n| |\n|_|\n")
+
+    def test_displays_the_number_ten_on_the_lcd(self):
+        self.assertTrue(True)
 
 
 if __name__ == '__main__':
