@@ -81,7 +81,10 @@ class NumberToLCDTestCase(unittest.TestCase):
             self.assertEqual(output, " _ \n| |\n|_|\n")
 
     def test_displays_the_number_ten_on_the_lcd(self):
-        self.assertTrue(True)
+        with captured_output() as (out, err):
+            print_number_from_representation(number_to_lcd_representation(10))
+            output = out.getvalue()
+            self.assertEqual(output, "   _ \n| | |\n| |_|\n")
 
 
 if __name__ == '__main__':
