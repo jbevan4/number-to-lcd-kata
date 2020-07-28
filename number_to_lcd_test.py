@@ -36,7 +36,3 @@ def test_displays_the_number_ten_on_the_lcd():
         print_number_from_representation(number_to_lcd_representation(10))
         output = out.getvalue()
         assert output == "   _ \n| | |\n| |_|\n"
-
-
-if __name__ == '__main__':
-    unittest.main()
