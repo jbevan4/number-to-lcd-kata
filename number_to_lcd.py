@@ -7,4 +7,4 @@ def number_to_lcd_representation(number):
 
 def print_number_from_representation(list_representation_of_number):
     for representation in zip(*list_representation_of_number):
-        print(" ".join(representation))
+        print("".join(representation))
